@@ -26,6 +26,13 @@ export default function Home() {
         <div className="w-[107%] h-[105%] bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-2xl font-bold">Welcome to Learnify</h1>
           <p>Your dashboard content goes here...</p>
+          <div className="absolute top-8 right-20">
+            <Link href="/profile">
+              <div className="p-2 rounded-lg">
+                <Image src="/images/person.png" alt="Profile" width={40} height={40} />
+              </div>
+            </Link>
+          </div>
         </div>
       </main>
     </div>
