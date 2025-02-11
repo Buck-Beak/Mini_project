@@ -3,20 +3,20 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="h-screen w-screen bg-red-400 flex">
-      <nav className="w-20 bg-red-400 text-white flex flex-col items-center py-6 space-y-6 fixed h-full">
+    <div className="h-screen w-screen bg-blue-950 flex">
+      <nav className="w-20 bg-blue-950 text-white flex flex-col items-center py-6 space-y-6 fixed h-full">
         <Link href="/">
-          <div className="p-2 rounded-lg hover:bg-red-300 transition-colors">
+          <div className="p-2 rounded-lg hover:bg-yellow-300 duration-300 transition-colors">
             <Image src="/images/dashboards.png" alt="Dashboard" width={40} height={40} />
           </div>
         </Link>
         <Link href="/signup">
-          <div className="p-2 rounded-lg hover:bg-red-300 transition-colors">
+          <div className="p-2 rounded-lg hover:bg-red-300 duration-300 transition-colors">
             <Image src="/images/add-user.png" alt="Signup" width={40} height={40} />
           </div>
         </Link>
         <button className="logout">
-          <div className="p-2 rounded-lg hover:bg-red-300 transition-colors">
+          <div className="p-2 rounded-lg hover:bg-red-300 duration-300 transition-colors">
             <Image src="/images/turn-off.png" alt="Logout" width={40} height={40} />
           </div>
         </button>

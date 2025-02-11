@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { signUp } from "../functions/auth"
 import { useRouter } from 'next/navigation';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -9,10 +10,14 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
+  const userData = {
+    name,
+    email,
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    signUp(email, password,name);
+    signUp(email, password,userData);
     router.push('/login');
   };
 
