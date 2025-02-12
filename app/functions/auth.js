@@ -8,7 +8,8 @@ import {
   export const signIn = async (email, password) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      return res.user;
+      console.log(res.user);
+      return res.user;  
     } catch (error) {
       return error;
     }

@@ -1,6 +1,7 @@
+"use client"
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
-import { createContext, useContext, useEffect, useState } from "react";
+import React,{ createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase/fire";
 
 const UserContext = createContext();
@@ -19,17 +20,18 @@ export default function AuthContextProvider({ children }) {
         setIsLoggedOut(false);
         onSnapshot(doc(db, "users", currentUser.uid), (doc) => {
           setUser(doc.data());
+          console.log(doc.data());
         });
-
         console.log("It ran again");
       } else {
         setIsLoggedOut(true);
+        console.log("It ran");
       }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [isLoggedOut]);
 
   return (
     <UserContext.Provider

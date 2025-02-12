@@ -1,7 +1,11 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import { UserAuth } from "./context/AuthContextProvider";
 
 export default function Home() {
+  const { user } = UserAuth() || {};
+
   return (
     <div className="h-screen w-screen bg-blue-950 flex">
       <nav className="w-20 bg-blue-950 text-white flex flex-col items-center py-6 space-y-6 fixed h-full">
@@ -30,6 +34,7 @@ export default function Home() {
             <Link href="/profile">
               <div className="p-2 rounded-lg">
                 <Image src="/images/person.png" alt="Profile" width={40} height={40} />
+                <p>{user?.name}</p>
               </div>
             </Link>
           </div>

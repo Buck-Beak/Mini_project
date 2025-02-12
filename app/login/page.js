@@ -11,37 +11,52 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signIn(email, password);
+    user = signIn(email, password);
     router.push('/');
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form">
-      <h1>Login</h1>
-      <label>Email:</label>
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
-      <button
-        className="login-button"
-        onClick={handleLogin}
-      >
-        Login
-      </button>
+    <div className="h-screen w-screen bg-red-400 flex">
+      <div className="w-20 bg-red-400 text-white flex items-center py-6 space-y-6 fixed h-full">
       </div>
+
+      <main className="flex-1 flex justify-center items-center p-8 ml-20">
+          <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8 flex justify-center items-center">
+            <div className="flex flex-col bg-red-400 p-6 rounded-lg w-96 h-96 justify-center">
+              <h1 className="text-white text-center">Login</h1>
+              <label className="text-white">Email:</label>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-3 mb-3 border rounded-full outline-none"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <label className="text-white">Password:</label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full p-3 mb-3 border rounded-full outline-none"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <div className="flex justify-center mt-4">
+                <button
+                  className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-red-500"
+                  onClick={handleLogin}
+                >
+                  Login
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </main>
     </div>
+
+
+    
   );
 }
