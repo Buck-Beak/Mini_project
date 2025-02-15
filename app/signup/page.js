@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { signUp } from "../functions/auth"
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Link from "next/link";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -22,53 +23,46 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-screen w-screen bg-red-400 flex">
-      <div className="w-20 bg-red-400 text-white flex items-center py-6 space-y-6 fixed h-full">
+    <div className="flex flex-col bg-blue-950 p-6 rounded-lg w-96 h-100 justify-center">
+      <h1 className="text-white text-center">SignUp</h1>
+      <label className="text-white">Name:</label>
+      <input
+        type="text"
+        placeholder="Name"
+        className="w-full p-3 mb-3 border rounded-full outline-none"
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      />
+      <label className="text-white">Email:</label>
+      <input
+        type="email"
+        placeholder="Email"
+        className="w-full p-3 mb-3 border rounded-full outline-none"
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+      />
+      <label className="text-white">Password:</label>
+      <input
+        type="password"
+        placeholder="Password"
+        className="w-full p-3 mb-3 border rounded-full outline-none"
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+      />
+      <div className="flex justify-center mt-4">
+        <button
+          className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-blue-500"
+          onClick={handleSignUp}
+        >
+          SignUp
+        </button>
       </div>
-
-      <main className="flex-1 flex justify-center items-center p-8 ml-20">
-          <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8 flex justify-center items-center">
-            <div className="flex flex-col bg-red-400 p-6 rounded-lg w-96 h-96 justify-center">
-              <h1 className="text-white text-center">SignUp</h1>
-              <label className="text-white">Name:</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full p-3 mb-3 border rounded-full outline-none"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <label className="text-white">Email:</label>
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full p-3 mb-3 border rounded-full outline-none"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <label className="text-white">Password:</label>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full p-3 mb-3 border rounded-full outline-none"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <div className="flex justify-center mt-4">
-                <button
-                  className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-red-500"
-                  onClick={handleSignUp}
-                >
-                  SignUp
-                </button>
-              </div>
+      <p className="text-white">Already have an account?</p>
+      <Link href="/login" className="text-white">Login</Link>
               
-            </div>
-          </div>
-        </main>
     </div>
 
 

@@ -11,8 +11,8 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    user = signIn(email, password);
-    router.push('/');
+    const user = signIn(email, password);
+    router.push('/home');
   };
 
   return (
