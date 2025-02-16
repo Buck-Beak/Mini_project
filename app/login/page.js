@@ -16,13 +16,13 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen w-screen bg-red-400 flex">
-      <div className="w-20 bg-red-400 text-white flex items-center py-6 space-y-6 fixed h-full">
+    <div className="h-screen w-screen bg-blue-950 flex">
+      <div className="w-20 bg-blue-950 text-white flex items-center py-6 space-y-6 fixed h-full">
       </div>
 
       <main className="flex-1 flex justify-center items-center p-8 ml-20">
           <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8 flex justify-center items-center">
-            <div className="flex flex-col bg-red-400 p-6 rounded-lg w-96 h-96 justify-center">
+            <div className="flex flex-col bg-blue-950 p-6 rounded-lg w-96 h-96 justify-center">
               <h1 className="text-white text-center">Login</h1>
               <label className="text-white">Email:</label>
               <input
@@ -44,7 +44,7 @@ export default function Login() {
               />
               <div className="flex justify-center mt-4">
                 <button
-                  className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-red-500"
+                  className="p-2 rounded-lg hover:bg-blue-300 transition-colors w-20 text-white bg-blue-400"
                   onClick={handleLogin}
                 >
                   Login

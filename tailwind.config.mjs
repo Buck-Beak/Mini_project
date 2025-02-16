@@ -38,6 +38,7 @@ export default {
       animation: {
         typewriter: 'typewriter 2s steps(11) forwards',
         caret: 'typewriter 2s steps(11) forwards, blink 1s steps(11) infinite 2s',
+        fade: "fade 2s ease-in-out forwards",
       },
     },
     
