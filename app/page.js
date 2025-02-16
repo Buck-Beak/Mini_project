@@ -41,19 +41,26 @@ export default function StartPage() {
       <main className="flex-1 flex justify-center items-center p-8">
         <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-7xl">Learnify</h1>
-          <div className="flex-row w-[100%] h-[20%]">
+          <div className="flex items-center justify-evenly">
             {animationData && (
-              <Lottie
-                animationData={animationData}
-                loop={false}
-                autoplay
-                onComplete={handleAnimationComplete} // Event when animation completes
-              />
+              <div className="w-[32vw] h-[32vw]">
+                <Lottie
+                  animationData={animationData}
+                  loop={false}
+                  autoplay
+                  onComplete={handleAnimationComplete} // Event when animation completes
+                />
+              </div>
+
             )}
             <Signup />
           </div>
         </div>
       </main>
     </div>
+
+
+
+
   )
 }
