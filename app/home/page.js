@@ -22,7 +22,7 @@ export default function Home() {
             <Image src="/images/dashboards.png" alt="Dashboard" width={40} height={40} />
           </div>
         </Link>
-        <Link href="/signup">
+        <Link href="/">
           <div className="p-2 rounded-lg hover:bg-red-300 duration-300 transition-colors">
             <Image src="/images/add-user.png" alt="Signup" width={40} height={40} />
           </div>
