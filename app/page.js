@@ -2,17 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Signup from "./signup/page";
 import dynamic from "next/dynamic";
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-/*
-<p className="relative w-[max-content]
-            before:absolute before:inset-0 before:animate-typewriter
-            before:bg-white
-            after:absolute after:inset-0 after:w-[0.125em] after:animate-caret
-            after:bg-black">
-              Summarize
-            </p>
-*/
+import InfiniteMovingCards from "./infinite_cards/page";
 
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 const animations = [
   "/animations/flashcard_animation.json",
   "/animations/notes_animation.json"
@@ -54,13 +46,11 @@ export default function StartPage() {
 
             )}
             <Signup />
+            <div><InfiniteMovingCards /></div>
           </div>
         </div>
       </main>
     </div>
-
-
-
 
   )
 }
