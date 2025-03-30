@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Signup from "./signup/page";
 import dynamic from "next/dynamic";
 import InfiniteMovingCards from "./infinite_cards/page";
+import './styles.css';
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 const animations = [
@@ -52,7 +53,7 @@ export default function StartPage() {
     <div className="h-screen w-screen bg-blue-950 flex">
       <main className="flex-1 flex justify-center items-center p-8">
         <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8">
-          <h1 className="text-7xl">Learnify</h1>
+          <h1 className="learnify-title text-7xl">Learnify</h1>
           <div className="flex items-center justify-evenly relative">
             {/*{animationData && (
               <div className="w-[32vw] h-[32vw]">

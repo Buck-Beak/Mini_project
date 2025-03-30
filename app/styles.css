@@ -1,0 +1,8 @@
+.learnify-title {
+    font-size: 4rem; /* Adjust size */
+    color: #040d2c; /* Tailwind's blue-800 equivalent */
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Optional shadow */
+    margin-bottom: 1rem;
+  }
