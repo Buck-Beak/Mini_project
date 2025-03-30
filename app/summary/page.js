@@ -149,10 +149,7 @@ import { useRouter } from "next/navigation";
     };
 
     const handleGenerateFlashcards = () => {
-        router.push({
-            pathname: "/flashcards",
-            state: { summary }, 
-          });
+        router.push(`/flashcards?summary=${encodeURIComponent(summary)}`);
     }
 
     return(
