@@ -154,6 +154,10 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
         router.push(`/flashcards?summary=${encodeURIComponent(summary)}`);
     }
 
+    const handleGenerateQuestionPaper = () => {
+        router.push(`/question-paper?summary=${encodeURIComponent(summary)}`);
+    }
+
     return(
         <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
             <main className="flex-1 flex justify-center items-center p-8">
@@ -197,6 +201,7 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
                     <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md">Save as draft</button>
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md" onClick={summarizeText}>Upload</button>
                     <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md" onClick ={handleGenerateFlashcards} >Generate Flashcards</button>
+                    <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md" onClick ={handleGenerateQuestionPaper} >Generate Question paper</button>
                 </div>
             </div>
             </main>
