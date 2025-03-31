@@ -8,11 +8,13 @@ import { createData } from "../functions/crud";
 import { UserAuth } from "../context/AuthContextProvider";
 import flashcard from "../flashcards/page";
 import { useRouter } from "next/navigation";
+import { darkMode, useDarkMode } from "../darkModeContext/page";
 
  export default function Summary(){
 
     const { user } = UserAuth() || {};
     const router = useRouter();
+    const {darkMode} = useDarkMode();
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [text,setText] = useState("");
@@ -153,9 +155,8 @@ import { useRouter } from "next/navigation";
     }
 
     return(
-        <div className="h-screen w-screen bg-blue-950 flex">
+        <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
             <main className="flex-1 flex justify-center items-center p-8">
-            <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8 flex flex-grow flex-col items-center justify-center">
             <div className="bg-white rounded-2xl shadow-lg w-[90%] h-[90%] p-6 flex flex-col gap-y-6">
                 <h2 className="text-xl font-semibold mb-4 text-center">Share your work</h2>
                 <p className="text-gray-500 text-sm mb-4 text-center">What have you been working on?</p>
@@ -172,13 +173,7 @@ import { useRouter } from "next/navigation";
                         <p ><Image src="/images/cloud-computing.png" alt="Signup" width={40} height={40} /></p>
                     </div>
 
-                    {/*<textarea 
-                        type="text"
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                    />*/}
                     </label>
-                    {/* Display selected file */}
                     {selectedFile && (
                         <div className="mt-3 text-sm text-center text-gray-700">
                             <p className="font-medium">{selectedFile.name}</p>
@@ -203,7 +198,6 @@ import { useRouter } from "next/navigation";
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md" onClick={summarizeText}>Upload</button>
                     <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md" onClick ={handleGenerateFlashcards} >Generate Flashcards</button>
                 </div>
-            </div>
             </div>
             </main>
         </div>

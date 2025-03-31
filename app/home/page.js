@@ -5,71 +5,16 @@ import Link from "next/link";
 import { UserAuth } from "../context/AuthContextProvider";
 import { logout } from "../functions/auth";
 import { useRouter } from "next/navigation";
+import { useDarkMode } from "../darkModeContext/page";
 
 export default function Home() {
   const { user } = UserAuth() || {};
   const router = useRouter();
-  const [darkMode, setDarkMode] = useState(false);
-
-  // Load dark mode preference from local storage
-  useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedMode);
-  }, []);
-
-  // Toggle Dark Mode
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode);
-  };
-
-  const handleLogout = async () => {
-    await logout();
-    router.push("/"); // Redirect to home after logout
-  };
+  const {darkMode} = useDarkMode();
 
   return (
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
-      {/* Sidebar */}
-      <nav className="w-20 flex flex-col items-center py-6 space-y-6 fixed h-full shadow-lg">
-        {/* User Profile in Sidebar */}
-        <div className="text-center">
-          <Image src="/images/person.png" alt="User" width={40} height={40} />
-          <p className="text-sm mt-1">{user?.name || "Guest"}</p>
-        </div>
-
-        {/* Navigation Links */}
-        <Link href="/">
-          <div className="p-2 rounded-lg hover:bg-yellow-300 transition duration-300 group">
-            <Image src="/images/dashboards.png" alt="Dashboard" width={40} height={40} />
-            <p className="text-xs opacity-0 group-hover:opacity-100">Dashboard</p>
-          </div>
-        </Link>
-        <Link href="/courses">
-          <div className="p-2 rounded-lg hover:bg-green-300 transition duration-300 group">
-            <Image src="/images/courses.png" alt="Courses" width={40} height={40} />
-            <p className="text-xs opacity-0 group-hover:opacity-100">Courses</p>
-          </div>
-        </Link>
-        <Link href="/settings">
-          <div className="p-2 rounded-lg hover:bg-purple-300 transition duration-300 group">
-            <Image src="/images/settings.png" alt="Settings" width={40} height={40} />
-            <p className="text-xs opacity-0 group-hover:opacity-100">Settings</p>
-          </div>
-        </Link>
-
-        {/* Dark Mode Toggle */}
-        <button className="p-2 rounded-lg hover:bg-gray-700 transition duration-300" onClick={toggleDarkMode}>
-          {darkMode ? "🌞" : "🌙"}
-        </button>
-
-        {/* Logout Button */}
-        <button className="mt-auto p-2 rounded-lg hover:bg-red-300 transition duration-300" onClick={handleLogout}>
-          <Image src="/images/turn-off.png" alt="Logout" width={40} height={40} />
-        </button>
-      </nav>
-
+      
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-start p-8 ml-20">
         {/* Welcome Section */}

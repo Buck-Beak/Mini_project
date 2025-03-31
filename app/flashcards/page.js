@@ -4,10 +4,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useEffect,useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import darkMode, { useDarkMode } from "../darkModeContext/page";
 
     
 export default function flashcard() {
     const searchParams = useSearchParams();
+    const {darkMode} = useDarkMode();
     const summary = decodeURIComponent(searchParams.get("summary") || "");
     //const [flashcards, setFlashcards] = useState([]);
     const [questions,setQuestions] = useState([]);
@@ -52,7 +54,23 @@ export default function flashcard() {
         generateFlashcards();
     }, []);   
   return (
-    <div className="h-screen w-screen bg-blue-950 flex">
+    <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
+      <main className="flex-1 flex justify-center items-center p-8">
+      {questions.length > 0 && (
+        <div className="ques-option relative border p-6 rounded-xl shadow-lg bg-white text-center w-3/4 h-3/4 flex flex-col justify-center items-center">
+          <h2 className="font-bold text-2xl">{questions[currentIndex].question}</h2>
+          <p className="text-xl">Answer: {questions[currentIndex].answer}</p>
+          <button 
+            onClick={handleSwitch} 
+            className='absolute bottom-4 right-4'
+          >
+            <Image src="/images/next.png" alt="next" width={40} height={40} />
+          </button>
+        </div>
+      )}
+      </main>
+    </div>
+   /* <div className="h-screen w-screen bg-blue-950 flex">
       <main className="flex-1 flex justify-center items-center p-8">
         <div className="w-[105%] h-[107%] bg-white rounded-2xl shadow-lg p-8 flex justify-center items-center">
             {questions.length > 0 && (
@@ -69,6 +87,6 @@ export default function flashcard() {
             )}
         </div>
       </main>
-    </div>
+    </div>*/
   )
 }

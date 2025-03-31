@@ -1,7 +1,11 @@
 
 /*import { Geist, Geist_Mono } from "next/font/google";*/
+"use client"
 import AuthContextProvider from "./context/AuthContextProvider";
 import "./globals.css";
+import Navbar from "./navbar/page";
+import { useRouter } from "next/navigation";
+import { DarkModeProvider } from "./darkModeContext/page";
 
 /*const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,13 +23,21 @@ export const metadata = {
 };*/
 
 export default function RootLayout({ children }) {
+  const router = useRouter();
+
+  // Hide navbar only on the landing page ("/")
+  const showNavbar = router.pathname !== "/";
   return (
     <html lang="en">
       <body
         /*className={`${geistSans.variable} ${geistMono.variable} antialiased`}*/
       >
         <AuthContextProvider>
-          {children}
+          <DarkModeProvider>
+            {showNavbar && <Navbar />}
+        
+            {children}
+          </DarkModeProvider>
         </AuthContextProvider>
       </body>
     </html>
