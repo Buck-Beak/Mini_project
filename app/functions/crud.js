@@ -7,8 +7,12 @@ import {
     onSnapshot,
     setDoc,
     updateDoc,
+    query ,
+    where,
+    orderBy,
+    limit,
   } from "firebase/firestore";
-  import { db } from "../firebase/fire";
+  import { db} from "../firebase/fire";
   
   const generateRandomID = () => {
     const characters =
@@ -22,8 +26,7 @@ import {
     return randomID;
   };
   
-  export const createData = async (collectionName, data) => {
-    const id = generateRandomID();
+  export const createData = async (collectionName, data,id) => {
     try {
       const docRef = doc(db, collectionName, id);
       await setDoc(docRef, {
@@ -87,6 +90,37 @@ import {
       return newDataArr;
     } catch (error) {
       console.error("Error reading collection: ", error.message);
+    }
+  };
+
+  export const readLatestSummary = async (collectionName, userId) => {
+    try {
+      const summariesRef = collection(db, collectionName);
+      const querySnapshot = await getDocs(summariesRef);
+      
+      const userSummaries = [];
+  
+      // Loop through all documents
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.user === userId && data.timestamp) {
+          userSummaries.push(data);
+          console.log("User summary:", data);
+        }
+      });
+  
+      if (userSummaries.length === 0) {
+        console.log("No summaries found for this user.");
+        return null;
+      }
+  
+      // Sort manually by timestamp (latest first)
+      userSummaries.sort((a, b) => b.timestamp - a.timestamp);
+  
+      console.log("Latest summary:", userSummaries[0].summary);
+      return userSummaries[0].summary; // Return latest summary
+    } catch (error) {
+      console.error("Error fetching latest summary:", error.message);
     }
   };
   

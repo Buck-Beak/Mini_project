@@ -138,7 +138,7 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
 
             if (summaries.length > 0) {
                 setSummary(summaries.join(" "));
-                await createData("summaries", { summary:summaries,user:user?.uid });
+                await createData("summaries", { summary:summaries,timestamp: new Date(),user:user?.uid },user?.uid);
             } else {
                 setError("No summary generated. API might not be returning expected data.");
             }
@@ -151,11 +151,13 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
     };
 
     const handleGenerateFlashcards = () => {
-        router.push(`/flashcards?summary=${encodeURIComponent(summary)}`);
+        //router.push(`/flashcards?summary=${encodeURIComponent(summary)}`);
+        router.push("/flashcards");
     }
 
     const handleGenerateQuestionPaper = () => {
-        router.push(`/question-paper?summary=${encodeURIComponent(summary)}`);
+        //router.push(`/question-paper?summary=${encodeURIComponent(summary)}`);
+        router.push("/question-paper");
     }
 
     return(

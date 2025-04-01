@@ -5,18 +5,39 @@ import { useEffect,useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import darkMode, { useDarkMode } from "../darkModeContext/page";
+import { readLatestSummary } from '../functions/crud';
+import { UserAuth } from "../context/AuthContextProvider";
 
     
 export default function flashcard() {
-    const searchParams = useSearchParams();
+    //const searchParams = useSearchParams();
+    const { user } = UserAuth() || {};
     const {darkMode} = useDarkMode();
-    const summary = decodeURIComponent(searchParams.get("summary") || "");
-    //const [flashcards, setFlashcards] = useState([]);
+    //const summary = decodeURIComponent(searchParams.get("summary") || "");
+    const [summary, setSummary] = useState("");
     const [questions,setQuestions] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    //const [answers,setAnswers] = useState('');
-    console.log(summary);
     const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+
+    useEffect(() => {
+      const fetchSummary = async () => {
+        if (user?.uid) {
+          const latestSummary = await readLatestSummary("summaries", user.uid);
+          if (latestSummary) {
+            setSummary(latestSummary);
+            console.log("Summary",summary);
+          }
+        }
+      };
+  
+      fetchSummary();
+    }, [user?.uid]);
+
+    useEffect(() => {
+      if (summary) {
+        generateFlashcards();
+      }
+    }, [summary]);
 
     const generateFlashcards = async () => {
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash",
@@ -50,9 +71,9 @@ export default function flashcard() {
     }
   
 
-    useEffect(() => {
+    /*useEffect(() => {
         generateFlashcards();
-    }, []);   
+    }, []);*/   
   return (
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
       <main className="flex-1 flex justify-center items-center p-8">

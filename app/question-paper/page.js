@@ -4,15 +4,37 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useEffect,useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import { useDarkMode } from "../darkModeContext/page";
-
+import { UserAuth } from '../context/AuthContextProvider';
+import { readLatestSummary } from '../functions/crud';
     
 export default function Question_paper() {
-    const searchParams = useSearchParams();
+    //const searchParams = useSearchParams();
+    const { user } = UserAuth() || {};
     const {darkMode} = useDarkMode();
-    const summary = decodeURIComponent(searchParams.get("summary") || "");
+    //const summary = decodeURIComponent(searchParams.get("summary") || "");
     const [questions,setQuestions] = useState([]);
-    console.log(summary);
+    const [summary, setSummary] = useState("");
     const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+
+    useEffect(() => {
+          const fetchSummary = async () => {
+            if (user?.uid) {
+              const latestSummary = await readLatestSummary("summaries", user.uid);
+              if (latestSummary) {
+                setSummary(latestSummary);
+                console.log("Summary",summary);
+              }
+            }
+          };
+      
+          fetchSummary();
+        }, [user?.uid]);
+    
+        useEffect(() => {
+          if (summary) {
+            generateQuestionPaper();
+          }
+        }, [summary]);
 
     const generateQuestionPaper = async () => {
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash",
@@ -39,11 +61,7 @@ export default function Question_paper() {
         setQuestions(parsedData);
         console.log("Questions",questions);
 
-    }
-
-    useEffect(() => {
-        generateQuestionPaper();
-    }, []);   
+    } 
   return (
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex justify-center items-start pt-20`}>
       <div className="w-full max-w-4xl bg-white text-black p-8 rounded-lg shadow-lg flex flex-col overflow-y-auto max-h-[80vh]">
