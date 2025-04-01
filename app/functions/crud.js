@@ -26,7 +26,8 @@ import {
     return randomID;
   };
   
-  export const createData = async (collectionName, data,id) => {
+  export const createData = async (collectionName, data) => {
+    const id = generateRandomID();
     try {
       const docRef = doc(db, collectionName, id);
       await setDoc(docRef, {

@@ -138,7 +138,7 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
 
             if (summaries.length > 0) {
                 setSummary(summaries.join(" "));
-                await createData("summaries", { summary:summaries,timestamp: new Date(),user:user?.uid },user?.uid);
+                await createData("summaries", { summary:summaries,timestamp: new Date(),user:user?.uid });
             } else {
                 setError("No summary generated. API might not be returning expected data.");
             }

@@ -6,11 +6,33 @@ import { UserAuth } from "../context/AuthContextProvider";
 import { logout } from "../functions/auth";
 import { useRouter } from "next/navigation";
 import { useDarkMode } from "../darkModeContext/page";
+import { readAllData } from "../functions/crud";
 
 export default function Home() {
   const { user } = UserAuth() || {};
   const router = useRouter();
   const {darkMode} = useDarkMode();
+  const [recentSummaries, setRecentSummaries] = useState([]);
+
+  useEffect(() => {
+    const fetchSummaries = async () => {
+      if (!user?.uid) return; // Ensure user is logged in
+
+      try {
+        const allSummaries = await readAllData("summaries"); // Fetch all summaries
+        const userSummaries = allSummaries
+          .filter((summary) => summary.user === user.uid) // Filter by userId
+          .sort((a, b) => b.timestamp - a.timestamp) // Sort by latest timestamp
+          //.slice(0, 3); // Show only 3 latest summaries
+
+        setRecentSummaries(userSummaries);
+      } catch (error) {
+        console.error("Error fetching summaries:", error);
+      }
+    };
+
+    fetchSummaries();
+  }, [user]);
 
   return (
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
@@ -37,12 +59,26 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-6 mt-6">
           {/* Recent Activity */}
           <div className={`rounded-xl shadow-md p-5 ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
-            <h3 className="text-xl font-semibold">Recent Activity</h3>
-            <ul className="mt-2 text-sm">
-              <li>✅ Completed "React Basics"</li>
-              <li>📖 Started "Node.js Fundamentals"</li>
-              <li>💬 Joined a discussion on "Next.js vs React"</li>
-            </ul>
+          <h3 className="text-xl font-semibold mb-4">Recent Summaries</h3>
+            {recentSummaries.length > 0 ? (
+              <div className="grid grid-cols-1 gap-4">
+                {recentSummaries.map((summary, index) => (
+                  <div 
+                    key={index} 
+                    className={`p-4 rounded-lg shadow-lg ${darkMode ? "bg-gray-700" : "bg-gray-100"}`}
+                  >
+                    <p className="text-sm">
+                    📖 {summary?.summary?.length ? summary.summary.join(" ").substring(0, 80) + "..." : "No summary available"}
+                    </p>
+                    <p className="text-xs text-gray-400 mt-2">
+                    {summary.timestamp?.toDate? summary.timestamp.toDate().toLocaleDateString(): "No Date Available"}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No recent summaries found.</p>
+            )}
           </div>
 
           {/* Stats Overview */}
