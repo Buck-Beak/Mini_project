@@ -22,6 +22,8 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const [videoUrl, setVideoUrl] = useState("");
+
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const HEADERS = { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_KEY}` };
 
@@ -205,6 +207,7 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
                     <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md" onClick ={handleGenerateFlashcards} >Generate Flashcards</button>
                     <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded-md" onClick ={handleGenerateQuestionPaper} >Generate Question paper</button>
                 </div>
+            
             </div>
             </main>
         </div>
