@@ -63,17 +63,19 @@ export default function Home() {
             {recentSummaries.length > 0 ? (
               <div className="grid grid-cols-1 gap-4">
                 {recentSummaries.map((summary, index) => (
-                  <div 
-                    key={index} 
-                    className={`p-4 rounded-lg shadow-lg ${darkMode ? "bg-gray-700" : "bg-gray-100"}`}
-                  >
-                    <p className="text-sm">
-                    📖 {summary?.summary?.length ? summary.summary.join(" ").substring(0, 80) + "..." : "No summary available"}
-                    </p>
-                    <p className="text-xs text-gray-400 mt-2">
-                    {summary.timestamp?.toDate? summary.timestamp.toDate().toLocaleDateString(): "No Date Available"}
-                    </p>
-                  </div>
+                  <Link  key = {index} href={`/summary-details/${summary.id}`}>
+                    <div 
+                      key={index} 
+                      className={`p-4 rounded-lg shadow-lg ${darkMode ? "bg-gray-700" : "bg-gray-100"}`}
+                    >
+                      <p className="text-sm">
+                      📖 {summary?.summary?.length ? summary.summary.join(" ").substring(0, 80) + "..." : "No summary available"}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-2">
+                      {summary.timestamp?.toDate? summary.timestamp.toDate().toLocaleDateString(): "No Date Available"}
+                      </p>
+                    </div>
+                  </Link>
                 ))}
               </div>
             ) : (
