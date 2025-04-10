@@ -41,7 +41,7 @@ export default function Home() {
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-blue-950 text-black"} h-screen w-screen flex`}>
       
       {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-start p-8 ml-20">
+      <main className="flex-1 flex flex-col justify-start p-8 ml-20 gap-6">
         {/* Welcome Section */}
         <div className={`w-full rounded-2xl shadow-lg p-6 ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
           <h1 className="text-3xl font-bold">Welcome, {user?.name || "User"}! 🎉</h1>
