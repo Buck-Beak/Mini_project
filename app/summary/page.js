@@ -28,6 +28,19 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
     const HEADERS = { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_KEY}` };
 
     useEffect(() => {
+        const savedSummary = localStorage.getItem("summaryText");
+        if (savedSummary) {
+          setSummary(savedSummary);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (summary) {
+          localStorage.setItem("summaryText", summary);
+        }
+      }, [summary]);
+
+    useEffect(() => {
         pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js";
     }, []);
 
@@ -36,6 +49,7 @@ import { darkMode, useDarkMode } from "../darkModeContext/page";
         if (file) {
             setSelectedFile(file);
             setSummary("");
+            localStorage.removeItem("summaryText");
             extractTextFromPDF(file);
             //await createData("summaries", { text, summary: "Sustainability is ability to maintain or support a process over time.Sustainability is often broken into three core concepts: economic, environmental, and social.Many businesses and governments have committed to sustainable goals, such as reducing their environmental footprints and conserving resources.Some investors are actively embracing sustainability investments, known as green investments.Skeptics have accused some companies of greenwashing, the practice of misleading the public to make a business seem more environmentally friendly than it is.",user:user?.uid });
         }

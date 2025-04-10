@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { signUp } from "../functions/auth"
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 
 export default function Signup() {

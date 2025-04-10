@@ -8,6 +8,15 @@ import {useRouter} from 'next/navigation';
 import { logout } from '../functions/auth';
 import { useDarkMode } from '../darkModeContext/page';
 
+/*
+<Link href="/video">
+  <div className="w-50 h-50 flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-purple-300 transition duration-300 group">
+    <Image src="/images/courses.png" alt="Courses" width={40} height={40} />
+    <p className="text-white text-xs opacity-0 group-hover:opacity-100 text-center">Video Summarization</p>
+  </div>
+</Link>
+*/
+
 export default function Navbar() {
     const { user } = UserAuth() || {};
     const router = useRouter();
@@ -34,12 +43,7 @@ export default function Navbar() {
             <p className="text-white text-xs opacity-0 group-hover:opacity-100">Dashboard</p>
           </div>
         </Link>
-        <Link href="/courses">
-          <div className="w-50 h-50 flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-purple-300 transition duration-300 group">
-            <Image src="/images/courses.png" alt="Courses" width={40} height={40} />
-            <p className="text-white text-xs opacity-0 group-hover:opacity-100">Courses</p>
-          </div>
-        </Link>
+        
         <Link href="/summary">
           <div className="w-50 h-50 flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-purple-300 transition duration-300 group">
             <Image src="/images/summary.png" alt="Courses" width={40} height={40} />
