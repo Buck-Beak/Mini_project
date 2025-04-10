@@ -136,4 +136,22 @@ import {
       callback(newDataArr);
     });
   };
-  
+
+  export const readDocument = async (collectionName, documentId) => {
+    try {
+      const docRef = doc(db, collectionName, documentId);
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        return {
+          id: docSnap.id,
+          ...docSnap.data()
+        };
+      } else {
+        throw new Error("Document not found");
+      }
+    } catch (error) {
+      console.error("Error reading document:", error);
+      throw error;
+    }
+  };
