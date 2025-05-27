@@ -88,6 +88,24 @@ The Flash Cards page generates flash cards with the generated summary using Gemi
 
 ### Screenshots
 
+### Home Page
+![Home Page](./Home-page.png)
+
+### Login Page
+![Login Page](./login-page.png)
+
+### Landing Page
+![Landing Page](./landing-page.png)
+
+### Summary Page
+![Summary](./summarize-page.png)
+
+### Flash Cards
+![Flash Cards](./flashcard1-page.png)
+![Flash Cards](./flashcard2-page.png)
+
+### Question Paper
+![Question Paper](./qnpaper-page.png)
 
 
 
