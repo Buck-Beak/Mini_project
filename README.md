@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Learnify - Your Smart Study Companion
 
-## Getting Started
+**Learnify** is an AI-powered education platform designed to help students and educators by transforming bulky textbooks and PDFs into clear, structured notes, flashcards, and question papers. It uses advanced NLP techniques to make learning efficient and accessible.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+  - [Home](#home)
+  - [Firebase](#firebase)
+  - [NavBar](#navbar)
+  - [Signup](#signup)
+  - [Login](#login)
+  - [Summary](#summary)
+  - [Question Paper](#question-paper)
+  - [Flash Cards](#flashcards)
+- [Screenshots](#screenshots)
+
+## Installation
+
+1. Clone the repository
+
+```sh
+git clone https://github.com/your-username/learnify.git
+cd learnify
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the app
 
-## Learn More
+```sh
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Install Firebase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+npm install firebase
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+1. Sign up or log in via email.
+2. Upload any educational PDF.
+3. Let Learnify generate a structured summary using BART.
+4. Instantly convert the summary into:
+    a. Flash Cards 
+    b. Question Papers 
+5. Save summaries for future reference.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Home
+This is the dashboard page of the Learnify platform that welcomes the user and displays their most recently generated summaries. It offers a quick overview of learning activity tailored to each logged-in user.
+
+### Firebase
+Firebase configuration is done in this page.
+
+### Navbar
+This is the sidebar navigation bar for the Learnify platform, providing quick access to key features like Dashboard, Summarization, and Settings. It includes user info, dark mode toggle, and a logout option for seamless user experience.
+
+### Signup
+Signup page where users can signup using their email and password. Authentication is done using Firebase Auth.
+
+### Login
+Registered users can login using their email and password which is authenticated using Firebase Auth.
+
+### Summary
+The Summary page allows users to:
+
+1. Upload PDF documents
+2. Extract text using pdfjs-dist
+3. Use the BART model to generate concise summaries
+4. Save summaries to Firebase and localStorage
+5. Navigate to Flash Cards and Question Paper generation pages
+
+### Question Paper
+The Question paper page generates question papers with the generated summary using Gemini API.
+
+### Flash Cards
+The Flash Cards page generates flash cards with the generated summary using Gemini API.
+
+### Screenshots
+
+
+
+
+
+
